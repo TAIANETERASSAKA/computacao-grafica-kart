@@ -14,12 +14,12 @@ import subprocess
 import tempfile
 
 DADOS = {
-    "instituicao": "[NOME DA INSTITUIÇÃO]",
-    "curso": "[NOME DO CURSO]",
+    "instituicao": "Universidade de São Paulo",
+    "curso": "Ciência da Computação",
     "disciplina": "Computação Gráfica",
-    "aluno": "[NOME DO(A) ALUNO(A)]",
-    "professor": "[NOME DO(A) PROFESSOR(A)]",
-    "cidade": "[CIDADE]",
+    "autores": "Taiane\nCaio",   # um nome por linha (\n)
+    "professor": "",              # deixe vazio para omitir a linha
+    "cidade": "",                 # deixe vazio para mostrar só o ano
     "ano": "2026",
 }
 
@@ -141,7 +141,9 @@ def diagrama_estados():
 
 
 def conteudo(paginas):
-    D = {k: html.escape(v) for k, v in DADOS.items()}
+    D = {k: html.escape(v).replace("\n", "<br>") for k, v in DADOS.items()}
+    D["local_ano"] = f'{D["cidade"]}<br>{D["ano"]}' if D["cidade"] else D["ano"]
+    D["linha_professor"] = f'<br><br>Professor(a): {D["professor"]}' if D["professor"] else ""
     contador_figuras[0] = 0
     contador_tabelas[0] = 0
     p = []
@@ -150,19 +152,18 @@ def conteudo(paginas):
     # ---------------- Capa, folha de rosto, resumo e sumário ----------------
     add(f'''<section class="capa">
 <div class="topo">{D["instituicao"]}<br>{D["curso"]}</div>
-<div class="autor">{D["aluno"]}</div>
+<div class="autor">{D["autores"]}</div>
 <div class="titulo">MODELAGEM 3D DE UM KART E DESENVOLVIMENTO DO JOGO “KART DAS MOEDAS” NO GODOT</div>
 <div class="subtitulo">Relatório dos Trabalhos 1 e 2 da disciplina de {D["disciplina"]}</div>
-<div class="rodape">{D["cidade"]}<br>{D["ano"]}</div>
+<div class="rodape">{D["local_ano"]}</div>
 </section>''')
 
     add(f'''<section class="capa rosto">
-<div class="autor">{D["aluno"]}</div>
+<div class="autor">{D["autores"]}</div>
 <div class="titulo">MODELAGEM 3D DE UM KART E DESENVOLVIMENTO DO JOGO “KART DAS MOEDAS” NO GODOT</div>
 <div class="natureza">Relatório apresentado à disciplina de {D["disciplina"]} do curso de {D["curso"]}
-da {D["instituicao"]}, como requisito parcial para avaliação dos Trabalhos 1 (Modelagem) e 2 (Jogo 3D).<br><br>
-Professor(a): {D["professor"]}</div>
-<div class="rodape">{D["cidade"]}<br>{D["ano"]}</div>
+da {D["instituicao"]}, como requisito parcial para avaliação dos Trabalhos 1 (Modelagem) e 2 (Jogo 3D).{D["linha_professor"]}</div>
+<div class="rodape">{D["local_ano"]}</div>
 </section>''')
 
     add('''<section class="pre"><h1 class="semnum">RESUMO</h1>
