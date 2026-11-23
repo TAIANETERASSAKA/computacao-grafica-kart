@@ -1,0 +1,15 @@
+{
+  "objetos_total": 87,
+  "objetos_malha": 81,
+  "vertices": 11229,
+  "faces": 10699,
+  "triangulos": 22054,
+  "materiais": 15,
+  "modificadores_usados": [
+    "ARRAY",
+    "BEVEL",
+    "BOOLEAN",
+    "MIRROR",
+    "SUBSURF"
+  ]
+}

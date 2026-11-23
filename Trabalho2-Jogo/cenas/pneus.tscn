@@ -1,0 +1,48 @@
+[gd_scene format=3]
+
+[sub_resource type="StandardMaterial3D" id="Mat_borracha"]
+albedo_color = Color(0.05, 0.05, 0.05, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="Mat_pintado"]
+albedo_color = Color(0.92, 0.92, 0.92, 1)
+roughness = 0.7
+
+[sub_resource type="TorusMesh" id="Malha_pneu"]
+material = SubResource("Mat_borracha")
+inner_radius = 0.25
+outer_radius = 0.5
+rings = 24
+ring_segments = 10
+
+[sub_resource type="TorusMesh" id="Malha_pneu_pintado"]
+material = SubResource("Mat_pintado")
+inner_radius = 0.25
+outer_radius = 0.5
+rings = 24
+ring_segments = 10
+
+[sub_resource type="CylinderShape3D" id="Forma"]
+height = 0.75
+radius = 0.5
+
+[node name="Pneus" type="StaticBody3D" groups=["obstaculo"]]
+metadata/raio_livre = 2.2
+
+[node name="Pneu1" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.125, 0)
+mesh = SubResource("Malha_pneu")
+
+[node name="Pneu2" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.375, 0)
+rotation = Vector3(0, 0.6, 0)
+mesh = SubResource("Malha_pneu_pintado")
+
+[node name="Pneu3" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.625, 0)
+rotation = Vector3(0, 1.2, 0)
+mesh = SubResource("Malha_pneu")
+
+[node name="Colisao" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.375, 0)
+shape = SubResource("Forma")

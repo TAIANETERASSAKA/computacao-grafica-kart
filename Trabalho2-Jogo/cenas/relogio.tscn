@@ -1,0 +1,79 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/coletavel.gd" id="1_script"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_aro"]
+albedo_color = Color(0.1, 0.6, 1, 1)
+metallic = 0.6
+roughness = 0.3
+emission_enabled = true
+emission = Color(0.1, 0.6, 1, 1)
+emission_energy_multiplier = 1.5
+
+[sub_resource type="StandardMaterial3D" id="Mat_mostrador"]
+albedo_color = Color(0.95, 0.97, 1, 1)
+roughness = 0.4
+
+[sub_resource type="StandardMaterial3D" id="Mat_ponteiro"]
+albedo_color = Color(0.05, 0.05, 0.1, 1)
+
+[sub_resource type="TorusMesh" id="Malha_aro"]
+material = SubResource("Mat_aro")
+inner_radius = 0.42
+outer_radius = 0.55
+rings = 32
+ring_segments = 12
+
+[sub_resource type="CylinderMesh" id="Malha_mostrador"]
+material = SubResource("Mat_mostrador")
+top_radius = 0.45
+bottom_radius = 0.45
+height = 0.08
+radial_segments = 32
+rings = 1
+
+[sub_resource type="BoxMesh" id="Malha_ponteiro_grande"]
+material = SubResource("Mat_ponteiro")
+size = Vector3(0.05, 0.32, 0.12)
+
+[sub_resource type="BoxMesh" id="Malha_ponteiro_pequeno"]
+material = SubResource("Mat_ponteiro")
+size = Vector3(0.22, 0.05, 0.12)
+
+[sub_resource type="SphereShape3D" id="Forma"]
+radius = 1.0
+
+[node name="Relogio" type="Area3D"]
+monitorable = false
+script = ExtResource("1_script")
+tipo = "relogio"
+velocidade_giro = 1.8
+cor_particulas = Color(0.3, 0.75, 1, 1)
+
+[node name="Visual" type="Node3D" parent="."]
+position = Vector3(0, 1.0, 0)
+
+[node name="Aro" type="MeshInstance3D" parent="Visual"]
+rotation = Vector3(1.5708, 0, 0)
+mesh = SubResource("Malha_aro")
+
+[node name="Mostrador" type="MeshInstance3D" parent="Visual"]
+rotation = Vector3(1.5708, 0, 0)
+mesh = SubResource("Malha_mostrador")
+
+[node name="PonteiroGrande" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 0.13, 0)
+mesh = SubResource("Malha_ponteiro_grande")
+
+[node name="PonteiroPequeno" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.09, 0, 0)
+mesh = SubResource("Malha_ponteiro_pequeno")
+
+[node name="Brilho" type="OmniLight3D" parent="Visual"]
+light_color = Color(0.3, 0.7, 1, 1)
+light_energy = 1.5
+omni_range = 3.5
+
+[node name="Colisao" type="CollisionShape3D" parent="."]
+position = Vector3(0, 1.0, 0)
+shape = SubResource("Forma")

@@ -1,0 +1,422 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/hud.gd" id="1_script"]
+
+[sub_resource type="LabelSettings" id="LS_titulo"]
+font_size = 58
+font_color = Color(1, 0.8, 0.12, 1)
+outline_size = 14
+outline_color = Color(0.12, 0.05, 0, 1)
+
+[sub_resource type="LabelSettings" id="LS_grande"]
+font_size = 96
+outline_size = 18
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LS_tempo"]
+font_size = 54
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LS_medio"]
+font_size = 34
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LS_pequeno"]
+font_size = 19
+outline_size = 6
+outline_color = Color(0, 0, 0, 0.9)
+
+[sub_resource type="LabelSettings" id="LS_texto"]
+font_size = 19
+font_color = Color(0.9, 0.93, 1, 1)
+line_spacing = 4.0
+
+[sub_resource type="LabelSettings" id="LS_tecla"]
+font_size = 19
+font_color = Color(1, 0.8, 0.12, 1)
+
+[sub_resource type="LabelSettings" id="LS_recorde"]
+font_size = 26
+font_color = Color(1, 0.8, 0.12, 1)
+
+[sub_resource type="StyleBoxFlat" id="Estilo_painel"]
+content_margin_left = 34.0
+content_margin_top = 28.0
+content_margin_right = 34.0
+content_margin_bottom = 28.0
+bg_color = Color(0.03, 0.06, 0.15, 0.86)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.75, 0.1, 0.85)
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
+
+[node name="HUD" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_script")
+
+[node name="Jogo" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Moedas" type="Label" parent="Jogo"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 22.0
+offset_right = 420.0
+offset_bottom = 70.0
+text = "MOEDAS  0"
+label_settings = SubResource("LS_medio")
+
+[node name="Tempo" type="Label" parent="Jogo"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -160.0
+offset_top = 12.0
+offset_right = 160.0
+offset_bottom = 82.0
+grow_horizontal = 2
+text = "1:00"
+label_settings = SubResource("LS_tempo")
+horizontal_alignment = 1
+
+[node name="Recorde" type="Label" parent="Jogo"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -420.0
+offset_top = 32.0
+offset_right = -32.0
+offset_bottom = 62.0
+grow_horizontal = 0
+text = "RECORDE 0"
+label_settings = SubResource("LS_pequeno")
+horizontal_alignment = 2
+
+[node name="Velocidade" type="Label" parent="Jogo"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -380.0
+offset_top = -84.0
+offset_right = -32.0
+offset_bottom = -26.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "0 km/h"
+label_settings = SubResource("LS_medio")
+horizontal_alignment = 2
+
+[node name="Dicas" type="Label" parent="Jogo"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = -58.0
+offset_right = 900.0
+offset_bottom = -28.0
+grow_vertical = 0
+text = "ESPAÇO drift   ·   C câmera   ·   R voltar à largada   ·   ESC pausa"
+label_settings = SubResource("LS_pequeno")
+
+[node name="Mensagem" type="Label" parent="Jogo"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -200
+offset_bottom = -60
+grow_horizontal = 2
+grow_vertical = 2
+text = ""
+label_settings = SubResource("LS_grande")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Menu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Painel" type="PanelContainer" parent="Menu"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = 36.0
+offset_right = 560.0
+offset_bottom = -36.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("Estilo_painel")
+
+[node name="Coluna" type="VBoxContainer" parent="Menu/Painel"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Titulo" type="Label" parent="Menu/Painel/Coluna"]
+layout_mode = 2
+text = "KART DAS MOEDAS"
+label_settings = SubResource("LS_titulo")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Subtitulo" type="Label" parent="Menu/Painel/Coluna"]
+layout_mode = 2
+text = "Trabalho 2  ·  Computação Gráfica"
+label_settings = SubResource("LS_texto")
+horizontal_alignment = 1
+
+[node name="Separador1" type="HSeparator" parent="Menu/Painel/Coluna"]
+layout_mode = 2
+
+[node name="Objetivo" type="Label" parent="Menu/Painel/Coluna"]
+layout_mode = 2
+text = "Colete o máximo de moedas em 60 segundos! Relógios azuis dão +5 s e as faixas com setas dão turbo. Derrube os cones à vontade."
+label_settings = SubResource("LS_texto")
+autowrap_mode = 3
+
+[node name="Controles" type="GridContainer" parent="Menu/Painel/Coluna"]
+layout_mode = 2
+theme_override_constants/h_separation = 22
+theme_override_constants/v_separation = 4
+columns = 2
+
+[node name="Tecla0" type="Label" parent="Menu/Painel/Coluna/Controles"]
+layout_mode = 2
+text = "W  /  SETA CIMA"
+label_settings = SubResource("LS_tecla")
+
+[node name="Acao0" type="Label" parent="Menu/Painel/Coluna/Controles"]
+layout_mode = 2
+text = "acelerar"
+label_settings = SubResource("LS_texto")
+
+[node name="Tecla1" type="Label" parent="Menu/Painel/Coluna/Controles"]
+layout_mode = 2
+text = "S  /  SETA BAIXO"
+label_settings = SubResource("LS_tecla")
+
+[node name="Acao1" type="Label" parent="Menu/Painel/Coluna/Controles"]
+layout_mode = 2
+text = "frear e dar ré"
+label_settings = SubResource("LS_texto")
+
+[node name="Tecla2" type="Label" parent="Menu/Painel/Coluna/Controles"]
+layout_mode = 2
+text = "A D  /  SETAS"
+label_settings = SubResource("LS_tecla")
+
+[node name="Acao2" type="Label" parent="Menu/Painel/Coluna/Controles"]
+layout_mode = 2
+text = "virar"
+label_settings = SubResource("LS_texto")
+
+[node name="Tecla3" type="Label" parent="Menu/Painel/Coluna/Controles"]
+layout_mode = 2
+text = "ESPAÇO"
+label_settings = SubResource("LS_tecla")
+
+[node name="Acao3" type="Label" parent="Menu/Painel/Coluna/Controles"]
+layout_mode = 2
+text = "freio de mão (drift)"
+label_settings = SubResource("LS_texto")
+
+[node name="Tecla4" type="Label" parent="Menu/Painel/Coluna/Controles"]
+layout_mode = 2
+text = "C"
+label_settings = SubResource("LS_tecla")
+
+[node name="Acao4" type="Label" parent="Menu/Painel/Coluna/Controles"]
+layout_mode = 2
+text = "trocar câmera"
+label_settings = SubResource("LS_texto")
+
+[node name="Tecla5" type="Label" parent="Menu/Painel/Coluna/Controles"]
+layout_mode = 2
+text = "R"
+label_settings = SubResource("LS_tecla")
+
+[node name="Acao5" type="Label" parent="Menu/Painel/Coluna/Controles"]
+layout_mode = 2
+text = "voltar à largada"
+label_settings = SubResource("LS_texto")
+
+[node name="Tecla6" type="Label" parent="Menu/Painel/Coluna/Controles"]
+layout_mode = 2
+text = "ESC"
+label_settings = SubResource("LS_tecla")
+
+[node name="Acao6" type="Label" parent="Menu/Painel/Coluna/Controles"]
+layout_mode = 2
+text = "pausar"
+label_settings = SubResource("LS_texto")
+
+[node name="Separador2" type="HSeparator" parent="Menu/Painel/Coluna"]
+layout_mode = 2
+
+[node name="Recorde" type="Label" parent="Menu/Painel/Coluna"]
+layout_mode = 2
+text = "Recorde: 0 moedas"
+label_settings = SubResource("LS_recorde")
+horizontal_alignment = 1
+
+[node name="Espaco" type="Control" parent="Menu/Painel/Coluna"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Iniciar" type="Label" parent="Menu/Painel/Coluna"]
+layout_mode = 2
+text = "ENTER para começar"
+label_settings = SubResource("LS_medio")
+horizontal_alignment = 1
+
+[node name="Pausa" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Fundo" type="ColorRect" parent="Pausa"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.55)
+
+[node name="Titulo" type="Label" parent="Pausa"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -120
+offset_bottom = 0
+grow_horizontal = 2
+grow_vertical = 2
+text = "PAUSADO"
+label_settings = SubResource("LS_grande")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Opcoes" type="Label" parent="Pausa"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 10
+offset_bottom = 60
+grow_horizontal = 2
+grow_vertical = 2
+text = "ESC continuar   ·   Q voltar ao menu"
+label_settings = SubResource("LS_medio")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Fim" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Fundo" type="ColorRect" parent="Fim"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.4)
+
+[node name="Titulo" type="Label" parent="Fim"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -230
+offset_bottom = -110
+grow_horizontal = 2
+grow_vertical = 2
+text = "FIM DE JOGO!"
+label_settings = SubResource("LS_grande")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Pontos" type="Label" parent="Fim"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -100
+offset_bottom = -20
+grow_horizontal = 2
+grow_vertical = 2
+text = "0 moedas"
+label_settings = SubResource("LS_titulo")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Recorde" type="Label" parent="Fim"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -10
+offset_bottom = 40
+grow_horizontal = 2
+grow_vertical = 2
+text = "Recorde: 0 moedas"
+label_settings = SubResource("LS_medio")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="JogarNovamente" type="Label" parent="Fim"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 90
+offset_bottom = 140
+grow_horizontal = 2
+grow_vertical = 2
+text = "ENTER para jogar de novo"
+label_settings = SubResource("LS_medio")
+horizontal_alignment = 1
+vertical_alignment = 1

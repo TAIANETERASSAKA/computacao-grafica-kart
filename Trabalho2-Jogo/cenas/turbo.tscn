@@ -1,0 +1,28 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/turbo.gd" id="1_script"]
+[ext_resource type="Shader" path="res://shaders/turbo.gdshader" id="2_shader"]
+
+[sub_resource type="ShaderMaterial" id="Mat_turbo"]
+render_priority = 0
+shader = ExtResource("2_shader")
+
+[sub_resource type="PlaneMesh" id="Malha_faixa"]
+material = SubResource("Mat_turbo")
+size = Vector2(3, 5)
+
+[sub_resource type="BoxShape3D" id="Forma"]
+size = Vector3(3, 1, 5)
+
+[node name="Turbo" type="Area3D"]
+monitorable = false
+script = ExtResource("1_script")
+
+[node name="Visual" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.015, 0)
+cast_shadow = 0
+mesh = SubResource("Malha_faixa")
+
+[node name="Colisao" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.5, 0)
+shape = SubResource("Forma")

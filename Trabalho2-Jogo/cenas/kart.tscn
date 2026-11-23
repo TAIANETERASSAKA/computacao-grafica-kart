@@ -1,0 +1,24 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/kart.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://modelos/kart.glb" id="2_modelo"]
+[ext_resource type="AudioStream" path="res://sons/motor.wav" id="3_motor"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kart"]
+size = Vector3(1.3, 0.8, 1.8)
+
+[node name="Kart" type="CharacterBody3D"]
+script = ExtResource("1_script")
+
+[node name="Colisao" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.4, -0.1)
+shape = SubResource("BoxShape3D_kart")
+
+[node name="Modelo" type="Node3D" parent="."]
+
+[node name="kart" parent="Modelo" instance=ExtResource("2_modelo")]
+
+[node name="SomMotor" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_motor")
+volume_db = -18.0
+autoplay = true

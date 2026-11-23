@@ -1,0 +1,13 @@
+# Blender e Godot portáteis (baixe pelos sites oficiais; ver README)
+ferramentas/
+
+# Pacotes de entrega e executáveis (publicados na aba Releases do GitHub)
+entregas/
+
+# Cache do Godot e arquivos temporários
+.godot/
+*.blend1
+__pycache__/
+
+# HTML intermediário do relatório (gerado por gerar_relatorio.py)
+documentacao/relatorio.html
